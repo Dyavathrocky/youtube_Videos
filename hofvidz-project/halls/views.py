@@ -14,8 +14,7 @@ import requests
 
 
 
-#YOUTUBE_API_KEY = 'AIzaSyChoUppl_PyXdx1FZzWVgrHxQcgFTzbxl0'
-YOUTUBE_API_KEY = 'AIzaSyB3CYrs3bREPBB2953CcFHdbIBJ0nd5xyE'
+YOUTUBE_API_KEY = 'AIzaSyChoUppl_PyXdx1FZzWVgrHxQcgFTzbxl0'
 
 def home(request):
     recent_halls = Hall.objects.all().order_by('-id')[:3]
@@ -44,7 +43,7 @@ def add_video(request, pk):
             video_id = urllib.parse.parse_qs(parsed_url.query).get('v')
             if video_id:
                 video.youtube_id = video_id[0]
-                response = requests.get(f'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={ YOUTUBE_API_KEY }')
+                response = requests.get(f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={ YOUTUBE_API_KEY }')
                 json = response.json()
                 title = json['items'][0]['snippet']['title']
                 video.title = title
